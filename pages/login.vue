@@ -1,11 +1,17 @@
 <script setup lang="ts">
 const email = ref('');
 const password = ref('');
+
 const router = useRouter();
+
+const errorMessage = ref('');
+const successMessage = ref('');
 
 const client = useSupabaseClient();
 
 async function login() {
+  errorMessage.value = '';
+  successMessage.value = '';
   try {
     const {error: loginError} = await client.auth.signInWithPassword({
       email: email.value,
@@ -13,25 +19,28 @@ async function login() {
     });
 
     if (loginError) {
-      throw new Error(loginError.message);
+      errorMessage.value = loginError.message;
+    } else {
+      successMessage.value = 'Logged in successfully.';
+      await router.push('/');
     }
-
-    await router.push('/');
   } catch (error: any) {
-    console.error(error);
+    errorMessage.value = error.message;
   }
 }
 </script>
 
 <template>
   <h1>Login</h1>
-  <form>
+  <form @submit.prevent="login">
     <label for="email">Email</label>
-    <input type="email" id="email" name="email"/>
+    <input v-model="email" type="email" id="email" name="email" required/>
     <label for="password">Password</label>
-    <input type="password" id="password" name="password"/>
+    <input v-model="password" type="password" id="password" name="password" required/>
     <button type="submit">Login</button>
   </form>
+  <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
+  <p class="success" v-if="successMessage">{{ successMessage }}</p>
 </template>
 
 <style scoped>
@@ -51,5 +60,13 @@ button {
 
 h1 {
   margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
 }
 </style>
