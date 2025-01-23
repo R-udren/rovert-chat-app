@@ -27,5 +27,7 @@ export default defineNuxtConfig({
         redirect: false
     },
 
-    modules: ["nitro-cloudflare-dev", "@nuxtjs/supabase"]
+    css: ["~/assets/css/main.css"],
+
+    modules: ["nitro-cloudflare-dev", "@nuxtjs/supabase", "@nuxt/ui"]
 })

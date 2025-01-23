@@ -23,6 +23,7 @@ const user = useSupabaseUser();
             <nuxt-link to="/profile">Profile</nuxt-link>
           </li>
         </template>
+        <ColorModeButton/>
       </ul>
     </nav>
   </header>
@@ -34,8 +35,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #333;
-  color: white;
 }
 
 nav ul {

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useSupabaseClient} from "#imports";
-
 const email = ref('');
 const password = ref('');
 const errorMessage = ref('');
@@ -31,39 +29,19 @@ async function signUp() {
 <template>
   <div>
     <h1>Register</h1>
-    <input v-model="email" type="email" placeholder="Email"/>
-    <input v-model="password" type="password" placeholder="Password"/>
-    <button @click="signUp">Sign Up</button>
-    <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
-    <p class="success" v-if="successMessage">{{ successMessage }}</p>
+    <UInput v-model="email" type="email" placeholder="Email"/>
+    <UInput v-model="password" type="password" placeholder="Password"/>
+    <UButton label="Create Account" @click="signUp"/>
   </div>
 </template>
 
 <style scoped>
-input {
-  display: block;
+UInput, UButton {
   margin-bottom: 10px;
-}
-
-button {
-  display: block;
-  margin-top: 10px;
-}
-
-p {
-  margin-top: 10px;
+  gap: 1rem;
 }
 
 h1 {
   margin-bottom: 10px;
 }
-
-.error {
-  color: red;
-}
-
-.success {
-  color: green;
-}
-
 </style>
