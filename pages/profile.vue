@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  title: 'Profile',
+  middleware: ['auth'],
+});
+
 const user = useSupabaseUser();
 const client = useSupabaseClient();
 const router = useRouter();
@@ -37,12 +42,9 @@ async function signOut() {
 <template>
   <h1>Profile</h1>
   <p>Welcome to your profile page!</p>
-  <div v-if="!user">
-    <p>Loading...</p>
-  </div>
-  <div v-else>
+  <div v-if="user">
     <p>Email: {{ user.email }}</p>
-    <button @click="signOut">Sign Out</button>
+    <UButton label="Sign Out" @click="signOut"/>
   </div>
 
 </template>

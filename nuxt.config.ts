@@ -8,6 +8,18 @@ export default defineNuxtConfig({
         }
     },
 
+    app: {
+        head: {
+            charset: 'utf-8',
+            viewport: 'width=device-width, initial-scale=1',
+            title: 'rovert Chat App',
+            meta: [
+                {name: 'description', content: 'rovert Chat App'},
+                {name: 'author', content: 'R-udren'}
+            ]
+        }
+    },
+
     // runtimeConfig: {
     //     apiSecret: process.env.API_SECRET,
     //     public: {

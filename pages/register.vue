@@ -7,6 +7,15 @@ const toast = useToast();
 const client = useSupabaseClient();
 
 async function signUp() {
+  if (!email.value || !password.value) {
+    toast.add({
+      color: 'error',
+      title: 'Error',
+      description: 'Please fill in all fields'
+    });
+    return;
+  }
+
   try {
     const {error: signUpError} = await client.auth.signUp({
       email: email.value,
@@ -34,34 +43,6 @@ async function signUp() {
     });
   }
 }
-
-async function loginWithGithub() {
-  try {
-    const {error: githubError} = await client.auth.signInWithOauth({
-      provider: 'github',
-    });
-
-    if (githubError) {
-      toast.add({
-        color: 'error',
-        title: 'Error',
-        description: githubError.message
-      });
-    } else {
-      toast.add({
-        color: 'success',
-        title: 'Success',
-        description: 'Logged in with Github successfully'
-      });
-    }
-  } catch (error: any) {
-    toast.add({
-      color: 'error',
-      title: 'Error',
-      description: (error as Error).message
-    });
-  }
-}
 </script>
 
 <template>
@@ -70,7 +51,6 @@ async function loginWithGithub() {
     <UInput v-model="email" type="email" placeholder="Email"/>
     <UInput v-model="password" type="password" placeholder="Password"/>
     <UButton label="Create Account" @click="signUp"/>
-    <UButton label="Login with github" @click="loginWithGithub"/>
   </div>
 </template>
 
