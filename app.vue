@@ -2,5 +2,5 @@
 <UApp>
   <HeaderBar/>
   <NuxtPage/>
-<UApp/>
+</UApp>
 </template>
