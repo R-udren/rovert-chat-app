@@ -1,14 +1,12 @@
 <script setup lang="ts">
 const email = ref('');
 const password = ref('');
-const errorMessage = ref('');
-const successMessage = ref('');
+
+const toast = useToast();
 
 const client = useSupabaseClient();
 
 async function signUp() {
-  errorMessage.value = '';
-  successMessage.value = '';
   try {
     const {error: signUpError} = await client.auth.signUp({
       email: email.value,
@@ -16,12 +14,52 @@ async function signUp() {
     });
 
     if (signUpError) {
-      errorMessage.value = signUpError.message;
+      toast.add({
+        color: 'error',
+        title: 'Error',
+        description: signUpError.message
+      });
     } else {
-      successMessage.value = 'Seems like you have successfully signed up. Please check your email for verification.';
+      toast.add({
+        color: 'success',
+        title: 'Success',
+        description: 'Account created successfully'
+      });
     }
   } catch (error: any) {
-    errorMessage.value = (error as Error).message;
+    toast.add({
+      color: 'error',
+      title: 'Error',
+      description: (error as Error).message
+    });
+  }
+}
+
+async function loginWithGithub() {
+  try {
+    const {error: githubError} = await client.auth.signInWithOauth({
+      provider: 'github',
+    });
+
+    if (githubError) {
+      toast.add({
+        color: 'error',
+        title: 'Error',
+        description: githubError.message
+      });
+    } else {
+      toast.add({
+        color: 'success',
+        title: 'Success',
+        description: 'Logged in with Github successfully'
+      });
+    }
+  } catch (error: any) {
+    toast.add({
+      color: 'error',
+      title: 'Error',
+      description: (error as Error).message
+    });
   }
 }
 </script>
@@ -32,6 +70,7 @@ async function signUp() {
     <UInput v-model="email" type="email" placeholder="Email"/>
     <UInput v-model="password" type="password" placeholder="Password"/>
     <UButton label="Create Account" @click="signUp"/>
+    <UButton label="Login with github" @click="loginWithGithub"/>
   </div>
 </template>
 
