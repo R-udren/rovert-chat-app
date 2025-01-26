@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+
+  --font-scale: 1.2;
+  --text-sm: 0.875rem;
+  --text-base: calc(var(--text-sm) * var(--font-scale));
+  --text-lg: calc(var(--text-base) * var(--font-scale));
+  --text-xl: calc(var(--text-lg) * var(--font-scale));
+  --text-2xl: calc(var(--text-xl) * var(--font-scale));
+  --text-3xl: calc(var(--text-2xl) * var(--font-scale));
+  --text-4xl: calc(var(--text-3xl) * var(--font-scale));
+  --text-5xl: calc(var(--text-4xl) * var(--font-scale));
+  --text-6xl: calc(var(--text-5xl) * var(--font-scale));
+}
+
+h1 {
+  font-size: var(--text-2xl);
+}

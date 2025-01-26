@@ -1,25 +1,18 @@
-<script setup lang="ts">
-const email = ref('');
-const password = ref('');
+<script lang="ts" setup>
+const state = reactive({
+  email: '',
+  password: ''
+});
 
 const toast = useToast();
 
 const client = useSupabaseClient();
 
 async function signUp() {
-  if (!email.value || !password.value) {
-    toast.add({
-      color: 'error',
-      title: 'Error',
-      description: 'Please fill in all fields'
-    });
-    return;
-  }
-
   try {
     const {error: signUpError} = await client.auth.signUp({
-      email: email.value,
-      password: password.value
+      email: state.email,
+      password: state.password
     });
 
     if (signUpError) {
@@ -38,29 +31,34 @@ async function signUp() {
   } catch (error: any) {
     toast.add({
       color: 'error',
-      title: 'Error',
+      title: 'Unknown Error',
       description: (error as Error).message
     });
   }
 }
+
+async function validate(data: Partial<typeof state>) {
+  if (!data.email) {
+    return [{name: 'email', message: 'Email is required'}];
+  }
+
+  if (!data.password) {
+    return [{name: 'password', message: 'Password is required'}];
+  }
+
+  return [];
+}
 </script>
 
 <template>
-  <div>
     <h1>Register</h1>
-    <UInput v-model="email" type="email" placeholder="Email"/>
-    <UInput v-model="password" type="password" placeholder="Password"/>
-    <UButton label="Create Account" @click="signUp"/>
-  </div>
+  <UForm :state="state" :validate="validate" @submit="signUp">
+    <UFormField label="Email" name="email">
+      <UInput v-model="state.email" placeholder="Email" type="email"/>
+    </UFormField>
+    <UFormField label="Password" name="password">
+      <UInput v-model="state.password" placeholder="Password" type="password"/>
+    </UFormField>
+    <UButton label="Create Account" loading-auto type="submit"/>
+  </UForm>
 </template>
-
-<style scoped>
-UInput, UButton {
-  margin-bottom: 10px;
-  gap: 1rem;
-}
-
-h1 {
-  margin-bottom: 10px;
-}
-</style>

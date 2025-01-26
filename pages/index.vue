@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
-    <h1 class="text-3xl font-bold ">Home</h1>
+    <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-blue-500 via-blue-400 to-cyan-500">Home</h1>
     <p>Welcome to the home page</p>
-    <UButton label="Primary button"/>
-    <UButton label="Secondary button" color="secondary"/>
-  </div>
+    <div class="flex space-x-4">
+      <UButton label="Primary button"/>
+      <UButton color="secondary" label="Secondary button"/>
+    </div>
 </template>

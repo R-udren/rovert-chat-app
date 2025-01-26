@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 definePageMeta({
   title: 'Profile',
   middleware: ['auth'],
@@ -30,7 +30,7 @@ async function signOut() {
   } catch (error) {
     console.error(error);
     toast.add({
-      title: 'Error',
+      title: 'Unknown Error',
       description: 'An error occurred while signing out',
       color: 'error',
       duration: 5000,
@@ -44,7 +44,7 @@ async function signOut() {
   <p>Welcome to your profile page!</p>
   <div v-if="user">
     <p>Email: {{ user.email }}</p>
-    <UButton label="Sign Out" @click="signOut"/>
+    <UButton label="Sign Out" loading-auto @click="signOut"/>
   </div>
 
 </template>

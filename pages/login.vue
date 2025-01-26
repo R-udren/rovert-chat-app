@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const email = ref('');
 const password = ref('');
 
@@ -13,6 +13,8 @@ async function loginAccount() {
     toast.add({
       title: 'Error',
       description: 'Please fill in all fields',
+      color: 'error',
+      icon: 'i-lucide-error'
     });
     console.log('Please fill in all fields');
     return;
@@ -29,18 +31,23 @@ async function loginAccount() {
       toast.add({
         title: 'Error',
         description: loginError.message,
+        color: 'error',
+        icon: 'i-lucide-error'
+
       });
     } else {
       toast.add({
         title: 'Success',
         description: 'Logged in successfully',
+        color: 'success'
       });
       await router.push('/');
     }
   } catch (error: any) {
     toast.add({
-      title: 'Error',
+      title: 'Unknown Error',
       description: error.message,
+      color: 'error'
     });
   }
 }
@@ -48,27 +55,7 @@ async function loginAccount() {
 
 <template>
   <h1>Login</h1>
-  <UInput label="Email" v-model="email" type="email" placeholder="Email" required/>
-  <UInput label="Password" v-model="password" type="password" placeholder="Password" required/>
-  <UButton @click="loginAccount">Login</UButton>
+  <UInput v-model="email" label="Email" placeholder="Email" required type="email"/>
+  <UInput v-model="password" label="Password" placeholder="Password" required type="password"/>
+  <UButton loading-auto @click="loginAccount">Login</UButton>
 </template>
-
-<style scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-input {
-  padding: 5px;
-}
-
-button {
-  padding: 5px;
-}
-
-h1 {
-  margin-bottom: 10px;
-}
-</style>
