@@ -8,19 +8,19 @@ const user = useSupabaseUser();
     <nav>
       <ul>
         <li>
-          <nuxt-link to="/">Home</nuxt-link>
+          <ULink to="/">Home</ULink>
         </li>
         <template v-if="!user">
           <li>
-            <nuxt-link to="/login">Login</nuxt-link>
+            <ULink to="/login">Login</ULink>
           </li>
           <li>
-            <nuxt-link to="/register">Register</nuxt-link>
+            <ULink to="/register">Register</ULink>
           </li>
         </template>
         <template v-else>
           <li>
-            <nuxt-link to="/profile">Profile</nuxt-link>
+            <ULink to="/profile">Profile</ULink>
           </li>
         </template>
         <ColorModeButton/>
@@ -43,18 +43,5 @@ nav ul {
   padding: 0;
   margin: 0;
   list-style: none;
-}
-
-nav ul li {
-  list-style: none;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
 }
 </style>

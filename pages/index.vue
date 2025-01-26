@@ -1,13 +1,8 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <h1>Home</h1>
-  <p>Welcome to the home page!</p>
+  <div class="flex flex-col items-center justify-center">
+    <h1 class="text-3xl font-bold ">Home</h1>
+    <p>Welcome to the home page</p>
+    <UButton label="Primary button"/>
+    <UButton label="Secondary button" color="secondary"/>
+  </div>
 </template>
-
-<style scoped>
-h1 {
-  margin-bottom: 10px;
-}
-</style>

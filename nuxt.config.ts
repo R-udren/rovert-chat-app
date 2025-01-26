@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: {
@@ -20,13 +22,6 @@ export default defineNuxtConfig({
         }
     },
 
-    // runtimeConfig: {
-    //     apiSecret: process.env.API_SECRET,
-    //     public: {
-    //         apiBase: process.env.API_BASE
-    //     }
-    // },
-
     routeRules: {
         '/**': {isr: true}
     },
@@ -40,6 +35,12 @@ export default defineNuxtConfig({
     },
 
     css: ["~/assets/css/main.css"],
+
+    vite: {
+        plugins: [
+            tailwindcss(),
+        ],
+    },
 
     modules: ["nitro-cloudflare-dev", "@nuxtjs/supabase", "@nuxt/ui"]
 })
