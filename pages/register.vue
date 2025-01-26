@@ -19,7 +19,8 @@ async function signUp() {
       toast.add({
         color: 'error',
         title: 'Error',
-        description: signUpError.message
+        description: signUpError.message,
+        icon: 'i-lucide-circle-alert'
       });
     } else {
       toast.add({
@@ -51,14 +52,14 @@ async function validate(data: Partial<typeof state>) {
 </script>
 
 <template>
-    <h1>Register</h1>
-  <UForm :state="state" :validate="validate" @submit="signUp">
+    <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-blue-500 via-blue-400 to-cyan-500">Register</h1>
+  <UForm :state="state" :validate="validate" class="space-y-4 flex flex-col items-center" @submit="signUp">
     <UFormField label="Email" name="email">
-      <UInput v-model="state.email" placeholder="Email" type="email"/>
+      <UInput v-model="state.email" placeholder="email" type="email"/>
     </UFormField>
     <UFormField label="Password" name="password">
-      <UInput v-model="state.password" placeholder="Password" type="password"/>
+      <UInput v-model="state.password" placeholder="strong-password" type="password"/>
     </UFormField>
-    <UButton label="Create Account" loading-auto type="submit"/>
+    <UButton class="" label="Create Account" loading-auto type="submit"/>
   </UForm>
 </template>
