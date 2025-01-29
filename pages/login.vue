@@ -83,6 +83,18 @@ async function validate(data: Partial<typeof state>) {
 
   return errors;
 }
+
+const signGithub = async () => {
+  const {error} = await auth.signInWithOAuth({provider: 'github', options: {redirectTo}})
+  if (error) {
+    toast.add({
+      color: 'error',
+      title: 'Github OAuth Error',
+      description: error.message,
+      icon: 'i-lucide-circle-alert'
+    });
+  }
+};
 </script>
 
 <template>
@@ -102,9 +114,10 @@ async function validate(data: Partial<typeof state>) {
           class="relative overflow-hidden group hover:shadow-md transition-all py-2"
           color="neutral"
           icon="i-mdi-github"
+          loading-auto
           size="lg"
           variant="soft"
-          @click="auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })"
+          @click="signGithub"
       >
         <div class="flex items-center justify-center gap-3">
           <i class="i-mdi-github text-xl"/>
@@ -131,8 +144,8 @@ async function validate(data: Partial<typeof state>) {
         <div class="h-24">
           <UFormField
               class="w-full"
-            label="Email address"
-            name="email"
+              label="Email address"
+              name="email"
           >
             <UInput
                 v-model="state.email"

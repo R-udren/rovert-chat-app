@@ -18,9 +18,9 @@ const user = useSupabaseUser();
                   class="px-3 py-2"
                   color="primary"
                   label="Sign In"
-                  size="sm"
+                  size="lg"
                   to="/login"
-                  variant="solid"
+                  variant="outline"
               />
             </li>
           </template>
