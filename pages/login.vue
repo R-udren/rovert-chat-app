@@ -86,56 +86,95 @@ async function validate(data: Partial<typeof state>) {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto p-4 space-y-6">
-    <h1 class="text-2xl font-bold bg-gradient-to-tr bg-clip-text text-transparent from-blue-500 via-blue-400 to-cyan-500 mb-6 py-1">
-      {{ state.isLogin ? 'Login' : 'Register' }}
-    </h1>
-    <UForm
+  <div class="min-h-[70vh] w-full flex items-center justify-center px-4">
+    <div class="w-full max-w-md rounded-xl shadow-lg p-6 space-y-8">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold">
+          {{ state.isLogin ? 'Welcome Back' : 'Create Account' }}
+        </h1>
+        <p class="mt-2">
+          {{ state.isLogin ? 'Sign in to your account' : 'Start your journey with us' }}
+        </p>
+      </div>
+
+      <UButton
+          block
+          class="relative overflow-hidden group hover:shadow-md transition-all py-2"
+          color="neutral"
+          icon="i-mdi-github"
+          size="lg"
+          variant="soft"
+          @click="auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })"
+      >
+        <div class="flex items-center justify-center gap-3">
+          <i class="i-mdi-github text-xl"/>
+          <span>Continue with GitHub</span>
+        </div>
+      </UButton>
+
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-zinc-200 dark:border-zinc-700"/>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-2 bg-white dark:bg-zinc-800 text-zinc-500">
+            Or continue with email
+          </span>
+        </div>
+      </div>
+
+      <UForm
         :state="state"
         :validate="validate"
-        class="space-y-4 flex flex-col w-full"
+        class="space-y-6"
         @submit="handleSubmit"
-    >
-      <UFormField label="Email" name="email">
-        <UInput
+      >
+        <UFormField
+            class="space-y-2"
+            label="Email address"
+            name="email"
+        >
+          <UInput
             v-model="state.email"
+            class="rounded-lg"
             placeholder="you@example.com"
             type="email"
-        />
-      </UFormField>
-      <UFormField label="Password" name="password">
-        <UInput
+          />
+        </UFormField>
+
+        <UFormField
+            class="space-y-2"
+            label="Password"
+            name="password"
+        >
+          <UInput
             v-model="state.password"
-            placeholder="Strong password"
+            class="rounded-lg"
+            placeholder="••••••••"
             type="password"
-        />
-      </UFormField>
-      <div class="flex space-x-4">
+          />
+        </UFormField>
+
         <UButton
-            :label="state.isLogin ? 'Switch to Register' : 'Switch to Login'"
+            :label="state.isLogin ? 'Sign In' : 'Create Account'"
             block
-            color="secondary"
-            type="button"
+            class="rounded-lg"
+            color="primary"
+            loading-auto
+            size="lg"
+            type="submit"
+        />
+      </UForm>
+
+      <div class="text-center">
+        <UButton
+            :label="state.isLogin ? 'Need an account?' : 'Already have an account?'"
+            class="text-sm"
+            color="neutral"
             variant="link"
             @click="state.isLogin = !state.isLogin"
         />
-        <UButton
-            :label="state.isLogin ? 'Login' : 'Register'"
-            block
-            color="primary"
-            type="submit"
-        />
       </div>
-    </UForm>
-
-    <UButton
-        block
-        class="w-full justify-center"
-        color="secondary"
-        icon="i-mdi-github"
-        label="GitHub"
-        variant="solid"
-        @click="auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })"
-    />
+    </div>
   </div>
 </template>
