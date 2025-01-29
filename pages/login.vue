@@ -126,7 +126,6 @@ async function validate(data: Partial<typeof state>) {
       <UForm
         :state="state"
         :validate="validate"
-        class="space-y-6"
         @submit="handleSubmit"
       >
         <div class="h-24">
