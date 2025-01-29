@@ -76,9 +76,9 @@ async function updateProfile() {
 async function resetPassword() {
   isLoading.value = true;
 
-  const { error } = await supabase.auth.resetPasswordForEmail(
-    user.value?.email as string,
-    { redirectTo: `${useRuntimeConfig().public.baseUrl}/reset-password` }
+  const {error} = await supabase.auth.resetPasswordForEmail(
+      user.value?.email as string,
+      {redirectTo: `${useRuntimeConfig().public.baseUrl}/reset-password`}
   );
 
   isLoading.value = false;
@@ -103,7 +103,7 @@ async function resetPassword() {
 async function signOut() {
   isLoading.value = true;
 
-  const { error } = await supabase.auth.signOut();
+  const {error} = await supabase.auth.signOut();
 
   if (error) {
     toast.add({
@@ -179,11 +179,11 @@ onMounted(loadProfile);
       <template #footer>
         <div class="flex justify-between items-center">
           <UButton
-            :loading="isLoading"
-            color="error"
-            label="Sign Out"
-            variant="ghost"
-            @click="signOut"
+              :loading="isLoading"
+              color="error"
+              label="Sign Out"
+              variant="ghost"
+              @click="signOut"
           />
           <UButton
               :loading="isLoading"

@@ -68,7 +68,7 @@ async function handleSubmit() {
 
 async function validate(data: Partial<typeof state>) {
   const errors = [];
-  
+
   if (!data.email) {
     errors.push({name: 'email', message: 'Email is required'});
   } else if (!/\S+@\S+\.\S+/.test(data.email)) {
@@ -137,9 +137,9 @@ const signGithub = async () => {
       </div>
 
       <UForm
-        :state="state"
-        :validate="validate"
-        @submit="handleSubmit"
+          :state="state"
+          :validate="validate"
+          @submit="handleSubmit"
       >
         <div class="h-24">
           <UFormField
@@ -160,8 +160,8 @@ const signGithub = async () => {
         <div class="h-24">
           <UFormField
               class="w-full"
-            label="Password"
-            name="password"
+              label="Password"
+              name="password"
           >
             <UInput
                 v-model="state.password"
