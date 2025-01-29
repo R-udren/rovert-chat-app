@@ -129,31 +129,37 @@ async function validate(data: Partial<typeof state>) {
         class="space-y-6"
         @submit="handleSubmit"
       >
-        <UFormField
-            class="space-y-2"
+        <div class="h-24">
+          <UFormField
+              class="w-full"
             label="Email address"
             name="email"
-        >
-          <UInput
-            v-model="state.email"
-            class="rounded-lg"
-            placeholder="you@example.com"
-            type="email"
-          />
-        </UFormField>
+          >
+            <UInput
+                v-model="state.email"
+                class="w-full rounded-lg mt-2"
+                placeholder="you@example.com"
+                size="lg"
+                type="email"
+            />
+          </UFormField>
+        </div>
 
-        <UFormField
-            class="space-y-2"
+        <div class="h-24">
+          <UFormField
+              class="w-full"
             label="Password"
             name="password"
-        >
-          <UInput
-            v-model="state.password"
-            class="rounded-lg"
-            placeholder="••••••••"
-            type="password"
-          />
-        </UFormField>
+          >
+            <UInput
+                v-model="state.password"
+                class="w-full rounded-lg mt-2"
+                placeholder="••••••••"
+                size="lg"
+                type="password"
+            />
+          </UFormField>
+        </div>
 
         <UButton
             :label="state.isLogin ? 'Sign In' : 'Create Account'"
