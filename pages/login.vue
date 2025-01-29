@@ -7,7 +7,16 @@ const state = reactive({
 
 const router = useRouter();
 const toast = useToast();
-const client = useSupabaseClient();
+const {auth} = useSupabaseClient();
+const user = useSupabaseUser();
+
+watchEffect(() => {
+  if (user.value) {
+    router.push('/');
+  }
+});
+
+const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`
 
 async function handleSubmit() {
   // Prevent form submission if validation fails
@@ -16,11 +25,11 @@ async function handleSubmit() {
 
   try {
     const response = state.isLogin
-        ? await client.auth.signInWithPassword({
+        ? await auth.signInWithPassword({
           email: state.email,
           password: state.password
         })
-        : await client.auth.signUp({
+        : await auth.signUp({
           email: state.email,
           password: state.password
         });
@@ -118,5 +127,15 @@ async function validate(data: Partial<typeof state>) {
         />
       </div>
     </UForm>
+
+    <UButton
+        block
+        class="w-full justify-center"
+        color="secondary"
+        icon="i-mdi-github"
+        label="GitHub"
+        variant="solid"
+        @click="auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })"
+    />
   </div>
 </template>

@@ -5,12 +5,12 @@ definePageMeta({
 });
 
 const user = useSupabaseUser();
-const client = useSupabaseClient();
 const router = useRouter();
+const {auth} = useSupabaseClient();
 
 const toast = useToast();
 
-client.auth.onAuthStateChange((event) => {
+auth.onAuthStateChange((event) => {
   if (event === 'SIGNED_OUT') {
     router.push('/');
   }
@@ -18,7 +18,7 @@ client.auth.onAuthStateChange((event) => {
 
 async function signOut() {
   try {
-    await client.auth.signOut();
+    await auth.signOut();
     await router.push('/');
 
     toast.add({
