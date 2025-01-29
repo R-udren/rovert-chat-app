@@ -15,9 +15,9 @@ const user = useSupabaseUser();
           <template v-if="!user">
             <li>
               <UButton
-                  class="px-3 py-1"
+                  class="px-3 py-2"
                   color="primary"
-                  label="Login"
+                  label="Sign In"
                   size="sm"
                   to="/login"
                   variant="solid"
@@ -27,7 +27,7 @@ const user = useSupabaseUser();
           <template v-else>
             <li>
               <ULink
-                  class="hover:text-blue-500 transition"
+                  class="hover:underline transition"
                   to="/profile"
               >
                 Profile

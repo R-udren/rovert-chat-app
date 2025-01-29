@@ -77,14 +77,14 @@ async function validate(data: Partial<typeof state>) {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto p-6">
-    <h1 class="text-6xl font-bold bg-gradient-to-tr bg-clip-text text-transparent from-blue-500 via-blue-400 to-cyan-500 mb-6 py-1">
+  <div class="max-w-md mx-auto p-4 space-y-6">
+    <h1 class="text-2xl font-bold bg-gradient-to-tr bg-clip-text text-transparent from-blue-500 via-blue-400 to-cyan-500 mb-6 py-1">
       {{ state.isLogin ? 'Login' : 'Register' }}
     </h1>
     <UForm
         :state="state"
         :validate="validate"
-        class="space-y-4 flex flex-col"
+        class="space-y-4 flex flex-col w-full"
         @submit="handleSubmit"
     >
       <UFormField label="Email" name="email">

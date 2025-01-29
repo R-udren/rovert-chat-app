@@ -42,7 +42,7 @@ async function signOut() {
 <template>
   <h1>Profile</h1>
   <p>Welcome to your profile page!</p>
-  <div v-if="user">
+  <div v-if="user" class="text-center">
     <p>Email: {{ user.email }}</p>
     <UButton label="Sign Out" loading-auto @click="signOut"/>
   </div>
