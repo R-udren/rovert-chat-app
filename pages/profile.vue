@@ -85,7 +85,7 @@ supabase.auth.onAuthStateChange((event) => {
         </div>
       </template>
 
-      <template>
+      <template #footer>
         <div class="flex justify-between items-center">
           <UButton
             :loading="isLoading"
