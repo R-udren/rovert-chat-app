@@ -16,8 +16,6 @@ watchEffect(() => {
   }
 });
 
-const redirectTo = `${window.location.origin}/confirm`
-
 async function handleSubmit() {
   // Prevent form submission if validation fails
   const errors = await validate(state);
@@ -85,7 +83,7 @@ async function validate(data: Partial<typeof state>) {
 }
 
 const signGithub = async () => {
-  const {error} = await auth.signInWithOAuth({provider: 'github', options: {redirectTo}})
+  const {error} = await auth.signInWithOAuth({provider: 'github', options: {redirectTo: window.location.origin + '/confirm'}});
   if (error) {
     toast.add({
       color: 'error',
@@ -104,14 +102,14 @@ const signGithub = async () => {
         <h1 class="text-3xl font-bold">
           {{ state.isLogin ? 'Welcome Back' : 'Create Account' }}
         </h1>
-        <p class="mt-2">
+        <p class="mt-4">
           {{ state.isLogin ? 'Sign in to your account' : 'Start your journey with us' }}
         </p>
       </div>
 
       <UButton
           block
-          class="relative overflow-hidden group hover:shadow-md transition-all py-2"
+          class="relative overflow-hidden group hover:shadow-md transition-all py-2 mb-6 mt-4"
           color="neutral"
           icon="i-mdi-github"
           loading-auto
@@ -139,6 +137,7 @@ const signGithub = async () => {
       <UForm
           :state="state"
           :validate="validate"
+          class="mt-4"
           @submit="handleSubmit"
       >
         <div class="h-24">
@@ -187,7 +186,7 @@ const signGithub = async () => {
       <div class="text-center">
         <UButton
             :label="state.isLogin ? 'Need an account?' : 'Already have an account?'"
-            class="text-sm"
+            class="text-sm mt-4"
             color="neutral"
             variant="link"
             @click="state.isLogin = !state.isLogin"

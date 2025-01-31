@@ -3,8 +3,9 @@
     <h1 class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-blue-500 via-blue-400 to-cyan-500">
       Home</h1>
     <p class="mt-4">Welcome to the home page</p>
-    <div class="mr-4 mt-4">
+    <div class="mt-4">
       <UButton
+          class="mr-4"
           label="Navigate to profile"
           to="/profile"
       />
