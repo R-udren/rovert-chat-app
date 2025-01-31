@@ -16,7 +16,7 @@ watchEffect(() => {
   }
 });
 
-const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`
+const redirectTo = `${window.location.origin}/confirm`
 
 async function handleSubmit() {
   // Prevent form submission if validation fails
@@ -99,19 +99,19 @@ const signGithub = async () => {
 
 <template>
   <div class="min-h-[70vh] w-full flex items-center justify-center px-4">
-    <div class="w-full max-w-md rounded-xl shadow-lg p-6">
+    <div class="w-full max-w-md rounded-xl shadow-lg p-6 mb-8">
       <div class="text-center">
         <h1 class="text-3xl font-bold">
           {{ state.isLogin ? 'Welcome Back' : 'Create Account' }}
         </h1>
-        <p class="mt-4">
+        <p class="mt-2">
           {{ state.isLogin ? 'Sign in to your account' : 'Start your journey with us' }}
         </p>
       </div>
 
       <UButton
           block
-          class="relative overflow-hidden group hover:shadow-md transition-all py-2 mb-6 mt-4"
+          class="relative overflow-hidden group hover:shadow-md transition-all py-2"
           color="neutral"
           icon="i-mdi-github"
           loading-auto
@@ -137,7 +137,6 @@ const signGithub = async () => {
       </div>
 
       <UForm
-          class="mt-4"
           :state="state"
           :validate="validate"
           @submit="handleSubmit"
@@ -188,7 +187,7 @@ const signGithub = async () => {
       <div class="text-center">
         <UButton
             :label="state.isLogin ? 'Need an account?' : 'Already have an account?'"
-            class="text-sm mt-4"
+            class="text-sm"
             color="neutral"
             variant="link"
             @click="state.isLogin = !state.isLogin"

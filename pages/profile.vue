@@ -128,7 +128,7 @@ onMounted(loadProfile);
 </script>
 
 <template>
-  <div class="w-1xl mx-auto p-6 space-y-8">
+  <div class="w-1xl mx-auto p-6 mb-8">
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold">Profile Settings</h1>
@@ -140,7 +140,7 @@ onMounted(loadProfile);
 
     <UCard>
       <template #header>
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center mr-4">
           <UAvatar
               :alt="profile.user_name"
               :src="profile.avatar_url || ''"
@@ -153,7 +153,7 @@ onMounted(loadProfile);
         </div>
       </template>
 
-      <div class="space-y-6">
+      <div class="mb-6">
         <UFormField class="w-full" label="Username" name="username">
           <UInput v-model="profile.user_name"
                   :disabled="!isEditing"
