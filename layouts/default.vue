@@ -1,6 +1,6 @@
 <template>
   <HeaderBar/>
-  <div class="flex flex-col items-center justify-center space-8">
+  <div class="flex flex-col items-center justify-center">
     <slot/>
   </div>
 </template>

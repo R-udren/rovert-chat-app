@@ -4,18 +4,17 @@ const user = useSupabaseUser();
 
 <template>
   <header class="flex items-center justify-between px-4 py-3 shadow-sm">
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center">
       <ULink class="px-3 py-1 rounded-full font-bold text-xl tracking-wider" to="/">
         ChatApp
       </ULink>
     </div>
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center ml-4">
       <nav>
-        <ul class="flex space-x-4">
+        <ul class="flex mr-4">
           <template v-if="!user">
             <li>
               <UButton
-                  class="px-3 py-2"
                   color="primary"
                   label="Sign In"
                   size="lg"
