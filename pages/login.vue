@@ -83,7 +83,12 @@ async function validate(data: Partial<typeof state>) {
 }
 
 const signGithub = async () => {
-  const {error} = await auth.signInWithOAuth({provider: 'github', options: {redirectTo: window.location.origin + '/confirm'}});
+  const {error} = await auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: window.location.origin + '/confirm'
+    }
+  });
   if (error) {
     toast.add({
       color: 'error',
