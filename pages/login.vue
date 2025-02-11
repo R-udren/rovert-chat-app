@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import {trackEvent} from "@aptabase/web";
+
 const state = reactive({
   email: "",
   password: "",
@@ -52,6 +54,8 @@ async function handleSubmit() {
         : "Account created successfully",
     });
 
+    await trackEvent("auth", {action: state.isLogin ? "login" : "signup"});
+
     if (state.isLogin) {
       await router.push("/");
     }
@@ -99,7 +103,9 @@ const signGithub = async () => {
       description: error.message,
       icon: "i-lucide-circle-alert",
     });
+    return;
   }
+  await trackEvent("auth", {action: "github_signin"});
 };
 </script>
 

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import type { Database } from "~~/types/Database";
+import type {Database} from "~~/types/Database";
+import {trackEvent} from "@aptabase/web";
+
 
 definePageMeta({
   title: "Profile",
@@ -39,6 +41,8 @@ async function loadProfile() {
     return;
   }
 
+  await trackEvent("profile", {action: "load"});
+
   if (data) profile.value = data;
 }
 
@@ -62,6 +66,8 @@ async function updateProfile() {
     return;
   }
 
+  await trackEvent("profile", {action: "update"});
+
   isEditing.value = false;
   toast.add({
     title: "Success",
@@ -80,6 +86,8 @@ async function resetPassword() {
   );
 
   isLoading.value = false;
+
+  await trackEvent("auth", {action: "reset-password"});
 
   if (error) {
     toast.add({
@@ -102,6 +110,9 @@ async function signOut() {
   isLoading.value = true;
 
   const { error } = await supabase.auth.signOut();
+
+  await trackEvent("auth", {action: "sign-out"});
+
 
   if (error) {
     toast.add({
