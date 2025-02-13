@@ -160,7 +160,7 @@ onMounted(loadProfile);
       </template>
 
       <div class="">
-        <div class="flex flex-row gap-4 mb-6">
+        <div class="flex flex-row gap-4 mb-4">
           <UFormField class="w-full" label="Username" name="username">
             <UInput
               v-model="profile.user_name"
