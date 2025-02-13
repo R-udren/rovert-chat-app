@@ -135,7 +135,11 @@ onMounted(loadProfile);
 
 <template>
   <div class="flex flex-col items-center justify-between p-6">
-    <h1 class="text-3xl font-bold">Profile Settings</h1>
+    <h1
+      class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[var(--ui-primary)] to-[var(--ui-secondary)]"
+    >
+      Profile Settings
+    </h1>
     <p class="text-zinc-600 dark:text-zinc-400 my-4">
       Manage your account settings and preferences
     </p>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {trackEvent} from "@aptabase/web";
+import { trackEvent } from "@aptabase/web";
 
 const state = reactive({
   email: "",
@@ -54,7 +54,7 @@ async function handleSubmit() {
         : "Account created successfully",
     });
 
-    await trackEvent("auth", {action: state.isLogin ? "login" : "signup"});
+    await trackEvent("auth", { action: state.isLogin ? "login" : "signup" });
 
     if (state.isLogin) {
       await router.push("/");
@@ -105,7 +105,7 @@ const signGithub = async () => {
     });
     return;
   }
-  await trackEvent("auth", {action: "github_signin"});
+  await trackEvent("auth", { action: "github_signin" });
 };
 </script>
 
@@ -113,7 +113,9 @@ const signGithub = async () => {
   <div class="min-h-[70vh] w-full flex items-center justify-center px-4">
     <div class="w-full max-w-md rounded-xl shadow-lg p-6 mb-8">
       <div class="text-center">
-        <h1 class="text-3xl font-bold">
+        <h1
+          class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[var(--ui-primary)] to-[var(--ui-secondary)]"
+        >
           {{ state.isLogin ? "Welcome Back" : "Create Account" }}
         </h1>
         <p class="mt-4">
