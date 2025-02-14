@@ -25,6 +25,12 @@ const isLoading = ref(false);
 async function loadProfile() {
   if (!user.value?.id) return;
 
+  const cachedProfile = sessionStorage.getItem("profile");
+  if (cachedProfile) {
+    profile.value = JSON.parse(cachedProfile);
+    return;
+  }
+
   const { data, error } = await supabase
     .from("profiles")
     .select()
@@ -42,12 +48,22 @@ async function loadProfile() {
 
   await trackEvent("profile", { action: "load" });
 
-  if (data) profile.value = data;
+  if (data) {
+    profile.value = data;
+    sessionStorage.setItem("profile", JSON.stringify(data));
+  }
 }
 
 // Update profile
 async function updateProfile() {
   isLoading.value = true;
+
+  const cachedProfile = JSON.parse(sessionStorage.getItem("profile") || "{}");
+  if (JSON.stringify(cachedProfile) === JSON.stringify(profile.value)) {
+    isLoading.value = false;
+    isEditing.value = false;
+    return;
+  }
 
   const { error } = await supabase.from("profiles").upsert({
     id: user.value?.id,
@@ -68,6 +84,7 @@ async function updateProfile() {
   await trackEvent("profile", { action: "update" });
 
   isEditing.value = false;
+  sessionStorage.setItem("profile", JSON.stringify(profile.value));
   toast.add({
     title: "Success",
     description: "Profile updated successfully",
@@ -110,6 +127,8 @@ async function signOut() {
 
   const { error } = await supabase.auth.signOut();
 
+  isLoading.value = false;
+
   await trackEvent("auth", { action: "sign-out" });
 
   if (error) {
@@ -120,6 +139,9 @@ async function signOut() {
     });
     return;
   }
+
+  sessionStorage.removeItem("profile");
+  router.push("/");
 }
 
 // Watch for auth changes
