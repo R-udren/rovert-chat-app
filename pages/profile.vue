@@ -51,6 +51,12 @@ async function loadProfile() {
   if (data) {
     profile.value = data;
     sessionStorage.setItem("profile", JSON.stringify(data));
+  } else {
+    toast.add({
+      title: "Profile Not Found",
+      description: "Please create your profile.",
+      color: "warning",
+    });
   }
 }
 
@@ -151,8 +157,16 @@ supabase.auth.onAuthStateChange((event) => {
   }
 });
 
-// Initial load
-onMounted(loadProfile);
+// Initial load on app launch
+watch(
+  user,
+  async (newUser) => {
+    if (newUser) {
+      await loadProfile();
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
