@@ -134,19 +134,23 @@ onMounted(loadProfile);
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-between p-6 space-y-4">
-    <h1 class="text-3xl font-bold">Profile Settings</h1>
-    <p class="text-zinc-600 dark:text-zinc-400">
+  <div class="flex flex-col items-center justify-between p-6">
+    <h1
+      class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[var(--ui-primary)] to-[var(--ui-secondary)]"
+    >
+      Profile Settings
+    </h1>
+    <p class="text-zinc-600 dark:text-zinc-400 my-4">
       Manage your account settings and preferences
     </p>
 
-    <UCard class="w-xl">
+    <UCard class="w-md">
       <template #header>
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center">
           <UAvatar
+            class="mr-4 size-14"
             :alt="profile.user_name"
             :src="profile.avatar_url || ''"
-            size="3xl"
           />
           <div>
             <h3 class="text-lg font-medium">
@@ -159,23 +163,24 @@ onMounted(loadProfile);
         </div>
       </template>
 
-      <div class="space-y-6">
-        <UFormField class="w-full" label="Username" name="username">
-          <UInput
-            v-model="profile.user_name"
-            :disabled="!isEditing"
-            class="w-full"
-          />
-        </UFormField>
+      <div class="">
+        <div class="flex flex-row gap-4 mb-4">
+          <UFormField class="w-full" label="Username" name="username">
+            <UInput
+              v-model="profile.user_name"
+              :disabled="!isEditing"
+              class="w-full"
+            />
+          </UFormField>
 
-        <UFormField class="w-full" label="Full Name" name="full_name">
-          <UInput
-            v-model="profile.full_name"
-            :disabled="!isEditing"
-            class="w-full"
-          />
-        </UFormField>
-
+          <UFormField class="w-full" label="Full Name" name="full_name">
+            <UInput
+              v-model="profile.full_name"
+              :disabled="!isEditing"
+              class="w-full"
+            />
+          </UFormField>
+        </div>
         <UFormField class="w-full" label="Avatar Url" name="avatar_url">
           <UInput
             v-model="profile.avatar_url"

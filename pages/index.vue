@@ -1,9 +1,8 @@
 <script setup>
-import {init} from "@aptabase/web";
+import { init } from "@aptabase/web";
 
 init("A-EU-9438518681");
 </script>
-
 
 <template>
   <div class="flex flex-col items-center">
